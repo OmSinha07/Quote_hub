@@ -10,7 +10,7 @@ const App = () => {
   });
 
   useEffect(() => {
-    fetch("/api/api/quotes")
+    fetch("https://zenquotes.io")
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched Quotes:", data); // 👈 Check this in dev console
