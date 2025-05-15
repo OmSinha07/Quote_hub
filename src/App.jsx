@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "./components/ui/button";
-import { Card, CardContent } from "./components/ui/Card";
+import { Button } from "./Components1/Button";
+import { Card, CardContent } from "./Components1/Card";
 
 const App = () => {
   const [quotes, setQuotes] = useState([]);
