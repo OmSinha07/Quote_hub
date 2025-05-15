@@ -9,18 +9,26 @@ const App = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
-  useEffect(() => {
-    fetch("https://zenquotes.io")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Fetched Quotes:", data); // 👈 Check this in dev console
-        setQuotes(data.slice(0, 10));
-      })
-      .catch((err) => {
-        console.error("Failed to fetch quotes:", err);
-        setQuotes([]);
-      });
-  }, []);
+ useEffect(() => {
+  fetch(
+    "https://api.allorigins.win/get?url=" +
+      encodeURIComponent("https://zenquotes.io/api/quotes")
+  )
+    .then((res) => {
+      if (!res.ok) throw new Error("Network response not ok");
+      return res.json();
+    })
+    .then((data) => {
+      const json = JSON.parse(data.contents);
+      console.log("Fetched Quotes:", json); // 👈 Check this in dev console
+      setQuotes(json.slice(0, 10));
+    })
+    .catch((err) => {
+      console.error("Failed to fetch quotes:", err);
+      setQuotes([]);
+    });
+}, []);
+
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
